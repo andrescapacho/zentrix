@@ -1,0 +1,955 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --z-purple: #7C3AED;
+    --z-purple-light: #A855F7;
+    --z-purple-dark: #4C1D95;
+    --z-purple-glow: #9333EA;
+    --z-black: #0A0A0F;
+    --z-dark: #12101A;
+    --z-card: #1A1525;
+    --z-border: #2D2040;
+    --z-text: #E2D9F3;
+    --z-muted: #8B7AAA;
+    --pixel-font: 'Cinzel Decorative', serif;
+    --body-font: 'Rajdhani', sans-serif;
+  }
+
+  body {
+    background: var(--z-black);
+    color: var(--z-text);
+    font-family: var(--body-font);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* PIXEL PATTERN BG */
+  .pixel-bg {
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(124,58,237,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124,58,237,0.03) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(10,10,15,0.92);
+    border-bottom: 1px solid var(--z-border);
+    backdrop-filter: blur(12px);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav-logo {
+    font-family: var(--pixel-font);
+    font-size: 22px;
+    color: #fff;
+    letter-spacing: 2px;
+  }
+  .nav-logo span { color: var(--z-purple-light); }
+
+  .nav-links {
+    display: flex;
+    gap: 0;
+    list-style: none;
+  }
+
+  .nav-links a {
+    display: block;
+    padding: 8px 18px;
+    color: var(--z-muted);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    border-radius: 6px;
+  }
+  .nav-links a:hover { color: var(--z-purple-light); }
+
+  .nav-join {
+    background: var(--z-purple);
+    color: #fff !important;
+    border-radius: 6px !important;
+  }
+  .nav-join:hover { background: var(--z-purple-glow); color: #fff !important; }
+
+  /* SECTIONS */
+  section { position: relative; z-index: 1; }
+
+  /* HERO */
+  #inicio {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-orb {
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(124,58,237,0.18) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(124,58,237,0.15);
+    border: 1px solid rgba(124,58,237,0.4);
+    border-radius: 999px;
+    padding: 6px 18px;
+    font-size: 13px;
+    color: var(--z-purple-light);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-dot {
+    width: 7px; height: 7px;
+    background: #22C55E;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.4); }
+  }
+
+  .hero-title {
+    font-family: var(--pixel-font);
+    font-size: clamp(52px, 10vw, 100px);
+    font-weight: 900;
+    line-height: 1;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    letter-spacing: 4px;
+  }
+
+  .hero-title span {
+    color: var(--z-purple-light);
+    text-shadow: 0 0 40px rgba(168,85,247,0.5);
+  }
+
+  .hero-sub {
+    font-size: 20px;
+    color: var(--z-muted);
+    margin-bottom: 2.5rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .ip-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    background: var(--z-card);
+    border: 1px solid var(--z-border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 2.5rem;
+  }
+
+  .ip-label {
+    padding: 14px 20px;
+    font-size: 12px;
+    color: var(--z-purple-light);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    border-right: 1px solid var(--z-border);
+  }
+
+  .ip-value {
+    padding: 14px 24px;
+    font-family: 'Courier New', monospace;
+    font-size: 18px;
+    color: #fff;
+    letter-spacing: 2px;
+    user-select: all;
+  }
+
+  .ip-copy {
+    padding: 14px 20px;
+    border-left: 1px solid var(--z-border);
+    cursor: pointer;
+    color: var(--z-muted);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+    background: transparent;
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    color: var(--z-muted);
+  }
+  .ip-copy:hover { color: var(--z-purple-light); background: rgba(124,58,237,0.1); }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+  }
+
+  .stat {
+    text-align: center;
+  }
+  .stat-num {
+    font-family: var(--pixel-font);
+    font-size: 32px;
+    color: #fff;
+    display: block;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--z-muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+  }
+
+  /* SECTION COMMONS */
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  .section-tag {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--z-purple-light);
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: var(--pixel-font);
+    font-size: clamp(28px, 5vw, 44px);
+    color: #fff;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+  }
+
+  .section-divider {
+    width: 60px;
+    height: 3px;
+    background: var(--z-purple);
+    border-radius: 2px;
+    margin-bottom: 3rem;
+  }
+
+  /* RANGOS */
+  #rangos { background: var(--z-dark); }
+
+  .rangos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .rango-card {
+    background: var(--z-card);
+    border: 1px solid var(--z-border);
+    border-radius: 14px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    position: relative;
+    transition: transform 0.2s, border-color 0.2s;
+    overflow: hidden;
+  }
+
+  .rango-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--z-purple);
+  }
+
+  .rango-card.featured {
+    border-color: var(--z-purple);
+    background: linear-gradient(135deg, rgba(124,58,237,0.15), var(--z-card));
+  }
+
+  .featured-badge {
+    position: absolute;
+    top: 12px; right: 12px;
+    background: var(--z-purple);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+
+  .rango-icon {
+    font-size: 42px;
+    margin-bottom: 1rem;
+  }
+
+  .rango-name {
+    font-family: var(--pixel-font);
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .rango-price {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--z-purple-light);
+    margin-bottom: 1rem;
+  }
+  .rango-price span { font-size: 14px; color: var(--z-muted); font-weight: 400; }
+
+  .rango-features {
+    list-style: none;
+    text-align: left;
+    font-size: 14px;
+    color: var(--z-muted);
+    margin-bottom: 1.5rem;
+  }
+  .rango-features li {
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .rango-features li::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--z-purple);
+    border-radius: 1px;
+    flex-shrink: 0;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    font-family: var(--body-font);
+    text-decoration: none;
+  }
+
+  .btn-primary {
+    background: var(--z-purple);
+    color: #fff;
+  }
+  .btn-primary:hover { background: var(--z-purple-glow); transform: translateY(-1px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--z-purple-light);
+    border: 1px solid var(--z-purple);
+  }
+  .btn-outline:hover { background: rgba(124,58,237,0.1); }
+
+  /* REGLAS */
+  #reglas {}
+
+  .reglas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+
+  .regla-item {
+    background: var(--z-card);
+    border: 1px solid var(--z-border);
+    border-left: 3px solid var(--z-purple);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .regla-num {
+    font-family: var(--pixel-font);
+    font-size: 22px;
+    color: var(--z-purple);
+    min-width: 36px;
+    line-height: 1.2;
+  }
+
+  .regla-content h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 3px;
+    letter-spacing: 0.5px;
+  }
+
+  .regla-content p {
+    font-size: 13px;
+    color: var(--z-muted);
+    line-height: 1.5;
+  }
+
+  /* STAFF */
+  #staff { background: var(--z-dark); }
+
+  .staff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .staff-card {
+    background: var(--z-card);
+    border: 1px solid var(--z-border);
+    border-radius: 14px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .staff-card:hover { border-color: var(--z-purple); transform: translateY(-3px); }
+
+  .staff-avatar {
+    width: 72px; height: 72px;
+    border-radius: 12px;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--pixel-font);
+    font-size: 26px;
+    color: #fff;
+    background: linear-gradient(135deg, var(--z-purple-dark), var(--z-purple));
+  }
+
+  .staff-name {
+    font-family: var(--pixel-font);
+    font-size: 15px;
+    color: #fff;
+    margin-bottom: 0.25rem;
+  }
+
+  .staff-role {
+    font-size: 12px;
+    color: var(--z-purple-light);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    background: rgba(124,58,237,0.15);
+    border-radius: 999px;
+    padding: 3px 12px;
+    display: inline-block;
+    margin-bottom: 0.75rem;
+  }
+
+  .staff-desc {
+    font-size: 13px;
+    color: var(--z-muted);
+    line-height: 1.5;
+  }
+
+  /* GALERÍA */
+  #galeria {}
+
+  .galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 200px);
+    gap: 12px;
+  }
+
+  .galeria-item {
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    background: var(--z-card);
+    border: 1px solid var(--z-border);
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .galeria-item:hover { transform: scale(1.02); }
+  .galeria-item:hover .gal-overlay { opacity: 1; }
+
+  .galeria-item:nth-child(1) { grid-column: span 2; }
+  .galeria-item:nth-child(4) { grid-column: span 2; }
+
+  .gal-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Minecraft-like pixel art placeholders */
+  .gal-placeholder {
+    width: 100%; height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    position: relative;
+  }
+
+  .gal-p1 { background: linear-gradient(135deg, #1a2a1a 0%, #0d1a0d 50%, #1a1525 100%); }
+  .gal-p2 { background: linear-gradient(135deg, #1a1525 0%, #2d1b45 100%); }
+  .gal-p3 { background: linear-gradient(135deg, #0f1520 0%, #1a2535 100%); }
+  .gal-p4 { background: linear-gradient(135deg, #1a0d25 0%, #2d1540 100%); }
+  .gal-p5 { background: linear-gradient(135deg, #1a1520 0%, #0a0a0f 100%); }
+
+  .gal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(124,58,237,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .gal-label {
+    position: absolute;
+    bottom: 10px; left: 14px;
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--z-dark);
+    border-top: 1px solid var(--z-border);
+    padding: 3rem 2rem;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-logo {
+    font-family: var(--pixel-font);
+    font-size: 28px;
+    color: #fff;
+    margin-bottom: 0.75rem;
+  }
+  .footer-logo span { color: var(--z-purple-light); }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    list-style: none;
+  }
+  .footer-links a {
+    color: var(--z-muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--z-purple-light); }
+
+  .footer-copy {
+    font-size: 13px;
+    color: var(--z-muted);
+  }
+
+  .discord-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #5865F2;
+    color: #fff;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+    margin-bottom: 2rem;
+    transition: background 0.2s;
+    font-family: var(--body-font);
+    letter-spacing: 0.5px;
+  }
+  .discord-btn:hover { background: #4752C4; }
+
+  .discord-icon {
+    width: 22px; height: 22px;
+  }
+</style>
+
+<div class="pixel-bg"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Zent<span>ri</span>X</div>
+  <ul class="nav-links">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#rangos">Rangos</a></li>
+    <li><a href="#reglas">Reglas</a></li>
+    <li><a href="#staff">Staff</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#inicio" class="nav-join">Jugar</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="inicio">
+  <div class="hero-orb"></div>
+  <div class="hero-badge">
+    <span class="hero-dot"></span>
+    Servidor Online
+  </div>
+  <h1 class="hero-title">Zent<span>ri</span>X</h1>
+  <p class="hero-sub">Survival · SMP · Community</p>
+  <div class="ip-box">
+    <span class="ip-label">IP</span>
+    <span class="ip-value" id="ip-text">108.181.149.215:25669</span>
+    <button class="ip-copy" onclick="copyIP()">COPIAR</button>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num">30</span>
+      <span class="stat-label">Jugadores</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">3</span>
+      <span class="stat-label">Mundos</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">1.21</span>
+      <span class="stat-label">Versión</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">24/7</span>
+      <span class="stat-label">Online</span>
+    </div>
+  </div>
+</section>
+
+<!-- RANGOS -->
+<section id="rangos">
+  <div class="section-inner">
+    <p class="section-tag">Donaciones</p>
+    <h2 class="section-title">Rangos & Beneficios</h2>
+    <div class="section-divider"></div>
+    <div class="rangos-grid">
+
+      <div class="rango-card">
+        <div class="rango-icon">🪨</div>
+        <div class="rango-name">Piedra</div>
+        <div class="rango-price">Gratis <span>/ siempre</span></div>
+        <ul class="rango-features">
+          <li>Acceso completo al survival</li>
+          <li>1 set de /home</li>
+          <li>Chat general</li>
+          <li>Protección de terrenos básica</li>
+        </ul>
+        <button class="btn btn-outline" onclick="copyIP()">Conectar</button>
+      </div>
+
+      <div class="rango-card">
+        <div class="rango-icon">🪵</div>
+        <div class="rango-name">Maderero</div>
+        <div class="rango-price">$5 <span>/ mes</span></div>
+        <ul class="rango-features">
+          <li>Prefijo [Maderero] en chat</li>
+          <li>3 sets de /home</li>
+          <li>Kit exclusivo mensual</li>
+          <li>Acceso a mundo recursos</li>
+          <li>Color en nickname</li>
+        </ul>
+        <button class="btn btn-outline">Obtener</button>
+      </div>
+
+      <div class="rango-card featured">
+        <div class="featured-badge">Popular</div>
+        <div class="rango-icon">💎</div>
+        <div class="rango-name">Diamante</div>
+        <div class="rango-price">$12 <span>/ mes</span></div>
+        <ul class="rango-features">
+          <li>Prefijo [Diamante] brillante</li>
+          <li>8 sets de /home</li>
+          <li>Kit premium semanal</li>
+          <li>Vuelo en spawn</li>
+          <li>Acceso anticipado eventos</li>
+          <li>/nick con colores y formatos</li>
+        </ul>
+        <button class="btn btn-primary">Obtener</button>
+      </div>
+
+      <div class="rango-card">
+        <div class="rango-icon">👑</div>
+        <div class="rango-name">Élite</div>
+        <div class="rango-price">$25 <span>/ mes</span></div>
+        <ul class="rango-features">
+          <li>Prefijo [ÉLITE] animado</li>
+          <li>Homes ilimitados</li>
+          <li>Kit legendario diario</li>
+          <li>Vuelo en todo el servidor</li>
+          <li>Partículas personalizadas</li>
+          <li>Acceso VIP exclusivo</li>
+          <li>Prioridad de conexión</li>
+        </ul>
+        <button class="btn btn-primary">Obtener</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- REGLAS -->
+<section id="reglas">
+  <div class="section-inner">
+    <p class="section-tag">Comunidad</p>
+    <h2 class="section-title">Reglas del Servidor</h2>
+    <div class="section-divider"></div>
+    <div class="reglas-grid">
+
+      <div class="regla-item">
+        <span class="regla-num">01</span>
+        <div class="regla-content">
+          <h4>Respeto ante todo</h4>
+          <p>Trata a todos los jugadores con respeto. No se toleran insultos, discriminación ni acoso de ningún tipo.</p>
+        </div>
+      </div>
+
+      <div class="regla-item">
+        <span class="regla-num">02</span>
+        <div class="regla-content">
+          <h4>Prohibido el Griefing</h4>
+          <p>Destruir construcciones ajenas está terminantemente prohibido. Respeta el trabajo de los demás.</p>
+        </div>
+      </div>
+
+      <div class="regla-item">
+        <span class="regla-num">03</span>
+        <div class="regla-content">
+          <h4>Sin hacks ni cheats</h4>
+          <p>El uso de clientes modificados, hacks, autoclickers o cualquier ventaja injusta resulta en ban permanente.</p>
+        </div>
+      </div>
+
+      <div class="regla-item">
+        <span class="regla-num">04</span>
+        <div class="regla-content">
+          <h4>No al spam ni publicidad</h4>
+          <p>Prohibido hacer spam en el chat, publicitar otros servidores o compartir links no autorizados.</p>
+        </div>
+      </div>
+
+      <div class="regla-item">
+        <span class="regla-num">05</span>
+        <div class="regla-content">
+          <h4>No al PvP no consensuado</h4>
+          <p>El PvP solo está permitido en zonas habilitadas. No mates a otros jugadores sin su consentimiento.</p>
+        </div>
+      </div>
+
+      <div class="regla-item">
+        <span class="regla-num">06</span>
+        <div class="regla-content">
+          <h4>Respeta al Staff</h4>
+          <p>Las decisiones del equipo de moderación son finales. Si tienes una queja, usa los canales oficiales de Discord.</p>
+        </div>
+      </div>
+
+      <div class="regla-item">
+        <span class="regla-num">07</span>
+        <div class="regla-content">
+          <h4>Nicknames apropiados</h4>
+          <p>Usa un nombre de usuario adecuado. Los nombres ofensivos, inapropiados o que imiten al staff serán sancionados.</p>
+        </div>
+      </div>
+
+      <div class="regla-item">
+        <span class="regla-num">08</span>
+        <div class="regla-content">
+          <h4>Construcción responsable</h4>
+          <p>No construyas cerca del spawn o de otros jugadores sin permiso. Respeta las zonas protegidas del servidor.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- STAFF -->
+<section id="staff">
+  <div class="section-inner">
+    <p class="section-tag">Equipo</p>
+    <h2 class="section-title">Nuestro Staff</h2>
+    <div class="section-divider"></div>
+    <div class="staff-grid">
+
+      <div class="staff-card">
+        <div class="staff-avatar">E</div>
+        <div class="staff-name">ZentriX_Edwin</div>
+        <div class="staff-role">Dueño</div>
+        <p class="staff-desc">Fundador y desarrollador principal del servidor. Gestiona la infraestructura y la visión del proyecto.</p>
+      </div>
+
+      <div class="staff-card">
+        <div class="staff-avatar" style="background: linear-gradient(135deg,#1e3a5f,#2563eb);">A</div>
+        <div class="staff-name">Andres</div>
+        <div class="staff-role">Streamer</div>
+        <p class="staff-desc">Encargado de la gestión diaria, eventos especiales y supervisión del equipo de moderación.</p>
+      </div>
+
+      <div class="staff-card">
+        <div class="staff-avatar" style="background: linear-gradient(135deg,#1a3a1a,#16a34a);">S</div>
+        <div class="staff-name">꧁𖣘lazaroᴿᵈ𖣘꧂</div>
+        <div class="staff-role">Moderador</div>
+        <p class="staff-desc">Modera el chat y resuelve conflictos entre jugadores. Siempre dispuesto a ayudar.</p>
+      </div>
+
+      <div class="staff-card">
+        <div class="staff-avatar" style="background: linear-gradient(135deg,#3a1a1a,#dc2626);">N</div>
+        <div class="staff-name">Renatooo.com</div>
+        <div class="staff-role">Moderador</div>
+        <p class="staff-desc">Especialista en detección de cheaters y mantenimiento de la integridad competitiva.</p>
+      </div>
+
+      <div class="staff-card">
+        <div class="staff-avatar" style="background: linear-gradient(135deg,#2a2a1a,#ca8a04);">L</div>
+        <div class="staff-name">LunarCraft</div>
+        <div class="staff-role">Helper</div>
+        <p class="staff-desc">Guía a los jugadores nuevos y responde preguntas. El primer punto de contacto para nuevos usuarios.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section id="galeria">
+  <div class="section-inner">
+    <p class="section-tag">Imágenes</p>
+    <h2 class="section-title">Galería del Servidor</h2>
+    <div class="section-divider"></div>
+    <div class="galeria-grid">
+
+      <div class="galeria-item">
+        <div class="gal-placeholder gal-p1">
+          <img src="assets/survival.png" alt="Mundo Survival" class="gal-img">
+        </div>
+        <div class="gal-overlay">Ver imagen</div>
+        <div class="gal-label">Mundo Survival</div>
+      </div>
+
+      <div class="galeria-item">
+        <div class="gal-placeholder gal-p2">
+          <img src="assets/spawn.png" alt="Spawn" class="gal-img">
+        </div>
+        <div class="gal-overlay">Ver imagen</div>
+        <div class="gal-label">Spawn</div>
+      </div>
+
+      <div class="galeria-item">
+        <div class="gal-placeholder gal-p3">
+          <img src="assets/minas.png" alt="Minas" class="gal-img">
+        </div>
+        <div class="gal-overlay">Ver imagen</div>
+        <div class="gal-label">Minas</div>
+      </div>
+
+      <div class="galeria-item">
+        <div class="gal-placeholder gal-p4">
+          <img src="assets/ciudad.png" alt="Ciudad de Jugadores" class="gal-img">
+        </div>
+        <div class="gal-overlay">Ver imagen</div>
+        <div class="gal-label">Ciudad de Jugadores</div>
+      </div>
+
+      <div class="galeria-item">
+        <div class="gal-placeholder gal-p5">
+          <img src="assets/nether.png" alt="El Nether" class="gal-img">
+        </div>
+        <div class="gal-overlay">Ver imagen</div>
+        <div class="gal-label">El Nether</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Zent<span>ri</span>X</div>
+  <a class="discord-btn" href="#">
+    <svg class="discord-icon" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.001.022.012.043.03.056a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+    </svg>
+    Únete a nuestro Discord
+  </a>
+  <ul class="footer-links">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#rangos">Rangos</a></li>
+    <li><a href="#reglas">Reglas</a></li>
+    <li><a href="#staff">Staff</a></li>
+    <li><a href="#galeria">Galería</a></li>
+  </ul>
+  <p class="footer-copy">© 2025 ZentriX Network · Todos los derechos reservados · play.zentrix.net</p>
+</footer>
+
+<script>
+  function copyIP() {
+    navigator.clipboard.writeText('play.zentrix.net').then(() => {
+      const btn = document.querySelector('.ip-copy');
+      const orig = btn.textContent;
+      btn.textContent = '✓ COPIADA';
+      btn.style.color = '#22C55E';
+      setTimeout(() => { btn.textContent = orig; btn.style.color = ''; }, 2000);
+    });
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
