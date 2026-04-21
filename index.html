@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZentriX — Servidor Minecraft SMP</title>
+</head>
+<body>
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap');
@@ -617,6 +625,161 @@
   .discord-icon {
     width: 22px; height: 22px;
   }
+
+  /* HAMBURGER MENU */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 6px;
+    background: transparent;
+    border: none;
+    z-index: 200;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 24px; height: 2px;
+    background: var(--z-text);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* MOBILE DRAWER */
+  .nav-drawer {
+    display: none;
+    position: fixed;
+    top: 64px; left: 0; right: 0;
+    background: rgba(10,10,15,0.98);
+    border-bottom: 1px solid var(--z-border);
+    backdrop-filter: blur(16px);
+    z-index: 99;
+    padding: 1rem 0 1.5rem;
+    transform: translateY(-10px);
+    opacity: 0;
+    transition: transform 0.25s, opacity 0.25s;
+  }
+  .nav-drawer.open {
+    display: block;
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .nav-drawer ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .nav-drawer a {
+    display: block;
+    padding: 14px 2rem;
+    color: var(--z-muted);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.2s, background 0.2s;
+    border-radius: 0;
+  }
+  .nav-drawer a:hover { color: var(--z-purple-light); background: rgba(124,58,237,0.08); }
+  .nav-drawer .nav-join {
+    margin: 1rem 2rem 0;
+    background: var(--z-purple);
+    color: #fff !important;
+    border-radius: 8px !important;
+    text-align: center;
+    padding: 14px 2rem;
+  }
+  .nav-drawer .nav-join:hover { background: var(--z-purple-glow); }
+
+  /* ============ RESPONSIVE BREAKPOINTS ============ */
+
+  /* Tablet: 768px */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+
+    #inicio { padding: 90px 1.25rem 3rem; }
+
+    .hero-title { letter-spacing: 2px; }
+
+    .hero-sub { font-size: 15px; letter-spacing: 2px; margin-bottom: 2rem; }
+
+    .ip-box { flex-direction: column; width: 100%; max-width: 320px; }
+    .ip-label { border-right: none; border-bottom: 1px solid var(--z-border); text-align: center; padding: 10px 20px; }
+    .ip-value { font-size: 15px; padding: 12px 16px; text-align: center; letter-spacing: 1px; }
+    .ip-copy { border-left: none; border-top: 1px solid var(--z-border); text-align: center; padding: 10px 20px; }
+
+    .hero-stats { gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+    .stat-num { font-size: 26px; }
+
+    .section-inner { padding: 3.5rem 1.25rem; }
+
+    .rangos-grid { grid-template-columns: 1fr 1fr; }
+
+    .reglas-grid { grid-template-columns: 1fr; }
+
+    .staff-grid { grid-template-columns: 1fr 1fr; }
+
+    .galeria-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(3, 160px);
+    }
+    .galeria-item:nth-child(1) { grid-column: span 2; }
+    .galeria-item:nth-child(4) { grid-column: span 1; }
+
+    .footer-links { flex-wrap: wrap; gap: 1rem; }
+  }
+
+  /* Mobile: 480px */
+  @media (max-width: 480px) {
+    nav { padding: 0 1.25rem; }
+
+    .nav-logo { font-size: 18px; }
+
+    #inicio { padding: 80px 1rem 2.5rem; }
+
+    .hero-badge { font-size: 11px; padding: 5px 14px; }
+
+    .hero-sub { font-size: 13px; letter-spacing: 1.5px; }
+
+    .ip-value { font-size: 14px; }
+
+    .hero-stats { gap: 1.25rem; }
+    .stat-num { font-size: 22px; }
+    .stat-label { font-size: 10px; }
+
+    .section-inner { padding: 3rem 1rem; }
+
+    .section-title { letter-spacing: 1px; }
+
+    .rangos-grid { grid-template-columns: 1fr; }
+
+    .rango-card { padding: 1.5rem 1.25rem; }
+
+    .staff-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .staff-card { padding: 1.25rem 1rem; }
+    .staff-avatar { width: 56px; height: 56px; font-size: 20px; }
+    .staff-name { font-size: 12px; }
+    .staff-desc { font-size: 12px; }
+
+    .galeria-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(5, 160px);
+    }
+    .galeria-item:nth-child(1) { grid-column: span 1; }
+    .galeria-item:nth-child(4) { grid-column: span 1; }
+
+    .footer-links { gap: 0.75rem; }
+    .footer-links a { font-size: 12px; }
+    .footer-copy { font-size: 11px; }
+
+    .discord-btn { font-size: 14px; padding: 11px 20px; }
+  }
 </style>
 
 <div class="pixel-bg"></div>
@@ -632,7 +795,22 @@
     <li><a href="#galeria">Galería</a></li>
     <li><a href="#inicio" class="nav-join">Jugar</a></li>
   </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE DRAWER -->
+<div class="nav-drawer" id="drawer">
+  <ul>
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#rangos">Rangos</a></li>
+    <li><a href="#reglas">Reglas</a></li>
+    <li><a href="#staff">Staff</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#inicio" class="nav-join">⚔ Jugar ahora</a></li>
+  </ul>
+</div>
 
 <!-- HERO -->
 <section id="inicio">
@@ -935,7 +1113,7 @@
 
 <script>
   function copyIP() {
-    navigator.clipboard.writeText('play.zentrix.net').then(() => {
+    navigator.clipboard.writeText('108.181.149.215:25669').then(() => {
       const btn = document.querySelector('.ip-copy');
       const orig = btn.textContent;
       btn.textContent = '✓ COPIADA';
@@ -944,12 +1122,33 @@
     });
   }
 
+  // Smooth scroll
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       e.preventDefault();
       const id = a.getAttribute('href').slice(1);
       const el = document.getElementById(id);
       if (el) el.scrollIntoView({ behavior: 'smooth' });
+      // Close drawer on link click
+      hamburger.classList.remove('open');
+      drawer.classList.remove('open');
     });
   });
+
+  // Hamburger toggle
+  const hamburger = document.getElementById('hamburger');
+  const drawer = document.getElementById('drawer');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    drawer.classList.toggle('open');
+  });
+
+  // Close drawer on outside click
+  document.addEventListener('click', e => {
+    if (!hamburger.contains(e.target) && !drawer.contains(e.target)) {
+      hamburger.classList.remove('open');
+      drawer.classList.remove('open');
+    }
+  });
 </script>
+</body></html>
